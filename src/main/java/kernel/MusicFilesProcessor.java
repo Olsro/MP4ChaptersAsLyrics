@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -69,7 +70,7 @@ public class MusicFilesProcessor {
         ProcessBuilder pb = new ProcessBuilder(cli.toArray(new String[0]));
         pb.redirectErrorStream(true);
         Process p = pb.start();
-        List<String> inputStreamLines = new BufferedReader(new InputStreamReader(p.getInputStream()))
+        List<String> inputStreamLines = new BufferedReader(new InputStreamReader(p.getInputStream(), StandardCharsets.UTF_8))
                 .lines().toList();
         String inputStreamContent = String.join("\n", inputStreamLines);
         p.waitFor();
@@ -97,7 +98,7 @@ public class MusicFilesProcessor {
         ProcessBuilder pb = new ProcessBuilder(cli.toArray(new String[0]));
         pb.redirectErrorStream(true);
         Process p = pb.start();
-        String inputStreamContent = new BufferedReader(new InputStreamReader(p.getInputStream()))
+        String inputStreamContent = new BufferedReader(new InputStreamReader(p.getInputStream(), StandardCharsets.UTF_8))
                 .lines().collect(Collectors.joining("\n"));
         p.waitFor();
         if (p.exitValue() != 0) {
