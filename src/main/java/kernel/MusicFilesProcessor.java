@@ -102,7 +102,7 @@ public class MusicFilesProcessor {
                 .lines().collect(Collectors.joining("\n"));
         p.waitFor();
         if (p.exitValue() != 0) {
-            throw new IOException("[FFMPEG] [SAVE] Return code: " + p.exitValue() + "\n" + inputStreamContent);
+            throw new IOException("[MP4Box] [SAVE] Return code: " + p.exitValue() + "\nCLI:" + String.join(" ", cli) + "\n" + inputStreamContent);
         }
     }
 
